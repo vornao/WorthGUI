@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToolBar?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane prefHeight="774.0" prefWidth="1004.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.WorthController">
+   <children>
+      <BorderPane prefHeight="774.0" prefWidth="0.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <top>
+            <VBox prefWidth="100.0" BorderPane.alignment="CENTER">
+               <children>
+                  <MenuBar>
+                    <menus>
+                      <Menu mnemonicParsing="false" text="File">
+                        <items>
+                          <MenuItem mnemonicParsing="false" text="Close" />
+                        </items>
+                      </Menu>
+                      <Menu mnemonicParsing="false" text="Edit">
+                        <items>
+                          <MenuItem mnemonicParsing="false" text="Delete" />
+                        </items>
+                      </Menu>
+                      <Menu mnemonicParsing="false" text="Help">
+                        <items>
+                          <MenuItem mnemonicParsing="false" text="About" />
+                        </items>
+                      </Menu>
+                    </menus>
+                  </MenuBar>
+                  <ToolBar maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" prefHeight="35.0" prefWidth="216.0" VBox.vgrow="ALWAYS">
+                    <items>
+                        <HBox fillHeight="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308">
+                           <children>
+                              <Button fx:id="newProjectButton" mnemonicParsing="false" onAction="#addProject" text="New Project..." textFill="#377c37">
+                                 <HBox.margin>
+                                    <Insets left="5.0" />
+                                 </HBox.margin>
+                              </Button>
+                            <Button fx:id="deleteProjectButton" mnemonicParsing="false" onAction="#deleteProject" text="Delete Project" textFill="RED">
+                                 <HBox.margin>
+                                    <Insets left="15.0" right="10.0" />
+                                 </HBox.margin>
+                              </Button>
+                              <Button fx:id="addMemberButton" mnemonicParsing="false" onAction="#addMember" text="Add Member">
+                                 <HBox.margin>
+                                    <Insets left="5.0" right="10.0" />
+                                 </HBox.margin>
+                              </Button>
+                            <Button fx:id="newCardButton" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#addCard" text="New Card..." textFill="#377c37" HBox.hgrow="ALWAYS">
+                                 <HBox.margin>
+                                    <Insets />
+                                 </HBox.margin>
+                              </Button>
+                              <Button fx:id="moveCardButton" mnemonicParsing="false" onAction="#moveCard" text="Move Card" textFill="#2339b9">
+                                 <HBox.margin>
+                                    <Insets left="10.0" right="10.0" />
+                                 </HBox.margin>
+                              </Button>
+                              <Button fx:id="cardInfoButton" mnemonicParsing="false" onAction="#showCardInfo" text="Card Info..." />
+                              <Button fx:id="showUsers" mnemonicParsing="false" onAction="#showUserList" text="Show WORTH Users">
+                                 <HBox.margin>
+                                    <Insets left="208.0" />
+                                 </HBox.margin>
+                              </Button>
+                              <Button mnemonicParsing="false" onAction="#set" text="Update" textFill="#377c37" HBox.hgrow="ALWAYS">
+                                 <HBox.margin>
+                                    <Insets left="10.0" />
+                                 </HBox.margin>
+                              </Button>
+                           </children>
+                        </HBox>
+                    </items>
+                  </ToolBar>
+               </children>
+            </VBox>
+         </top>
+         <bottom>
+            <HBox prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+               <children>
+                  <VBox prefHeight="200.0" HBox.hgrow="ALWAYS">
+                     <children>
+                        <TextArea fx:id="chatArea" editable="false" prefHeight="200.0" prefWidth="200.0" text="Chat messages will appear here&#10;">
+                           <VBox.margin>
+                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                           </VBox.margin>
+                        </TextArea>
+                        <HBox prefHeight="38.0" prefWidth="806.0">
+                           <children>
+                              <TextField fx:id="chatTextBox" prefHeight="25.0" promptText="Send new chat message!" HBox.hgrow="ALWAYS">
+                                 <HBox.margin>
+                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                 </HBox.margin>
+                              </TextField>
+                              <Button fx:id="sendChatButton" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#sendChat" text="Send" HBox.hgrow="ALWAYS">
+                                 <HBox.margin>
+                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                 </HBox.margin>
+                              </Button>
+                           </children>
+                        </HBox>
+                     </children>
+                  </VBox>
+               </children>
+            </HBox>
+         </bottom>
+         <left>
+            <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+               <children>
+                  <TableView fx:id="projectsTable" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minWidth="-Infinity" onMouseClicked="#updateView" prefWidth="200.0">
+                    <columns>
+                      <TableColumn fx:id="projectColumn" minWidth="-Infinity" prefWidth="219.0" resizable="false" text="Projects" />
+                    </columns>
+                  </TableView>
+                  <TableView fx:id="membersTable" minWidth="-Infinity" prefWidth="220.0">
+                    <columns>
+                      <TableColumn fx:id="membersColumn" minWidth="-1.0" prefWidth="218.0" resizable="false" text="Members" />
+                    </columns>
+                  </TableView>
+               </children>
+            </VBox>
+         </left>
+         <center>
+            <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+               <children>
+                  <TableView fx:id="cardTable" onMouseClicked="#cardSelected" VBox.vgrow="ALWAYS">
+                    <columns>
+                      <TableColumn fx:id="cardNameColumn" prefWidth="200.0" text="Name" />
+                      <TableColumn fx:id="currentCardListColumn" minWidth="100.0" prefWidth="187.0" resizable="false" text="Current List" />
+                        <TableColumn fx:id="cardDescriptionColumn" minWidth="150.0" prefWidth="-1.0" text="Description" />
+                    </columns>
+                  </TableView>
+               </children>
+            </VBox>
+         </center>
+      </BorderPane>
+   </children>
+</AnchorPane>

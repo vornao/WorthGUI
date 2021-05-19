@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+
+
+<AnchorPane prefHeight="500.0" prefWidth="300.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.ListUsersControllers">
+   <children>
+      <VBox prefHeight="200.0" prefWidth="100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <TableView fx:id="usersTable" prefHeight="512.0" prefWidth="300.0">
+              <columns>
+                <TableColumn fx:id="usernameColumn" maxWidth="150.0" minWidth="150.0" prefWidth="150.0" resizable="false" text="Username" />
+                <TableColumn fx:id="statusColumn" maxWidth="150.0" minWidth="150.0" prefWidth="150.0" resizable="false" text="Status" />
+              </columns>
+            </TableView>
+            <HBox prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <Pane HBox.hgrow="ALWAYS">
+                     <children>
+                        <CheckBox fx:id="onlineCheck" layoutX="37.0" layoutY="13.0" mnemonicParsing="false" onAction="#reloadList" text="Show Only Online Users" />
+                     </children>
+                  </Pane>
+                  <Button fx:id="okButton" mnemonicParsing="false" onAction="#close" text="Close" HBox.hgrow="ALWAYS">
+                     <HBox.margin>
+                        <Insets top="10.0" />
+                     </HBox.margin>
+                  </Button>
+                  <Pane HBox.hgrow="ALWAYS" />
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>
