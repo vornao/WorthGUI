@@ -64,6 +64,7 @@ public class Client {
 
     public Client(String address, int port, int rmiport, String registry, ChatHelper chatHelper) throws IOException, NotBoundException {
         //todo parse command line arguments
+        Printer.println("Starting client with target: " + address, "yellow");
         this.chatHelper = chatHelper;
         this.registry = LocateRegistry.getRegistry(address, rmiport);
         remote = (RMIServerInterface) this.registry.lookup(registry);
