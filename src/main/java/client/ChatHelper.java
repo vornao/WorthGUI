@@ -137,4 +137,8 @@ public class ChatHelper {
         if(project == null) throw new ProjectNotFoundException();
         datagramChannel.send(buffer, new InetSocketAddress(address, 5678));
     }
+
+    public void close() throws IOException {
+        datagramChannel.close();
+    }
 }

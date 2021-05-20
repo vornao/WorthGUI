@@ -5,11 +5,14 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.stage.Stage;
 import org.apache.commons.cli.*;
 
+import java.io.IOException;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
+import java.rmi.NotBoundException;
 
 public class WorthGUI extends Application {
 
@@ -22,12 +25,21 @@ public class WorthGUI extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception{
+        ChatHelper chatHelper;
+        Client worthClient;
 
+        try {
+            chatHelper  = new ChatHelper(CHAT_PORT, CHAT_SOCKET_ADDR);
+            worthClient = new Client(ADDRESS, TCP_PORT, RMI_PORT, REGISTRY_NAME, chatHelper);
+        }catch (IOException | NotBoundException e){
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Oops...");
+            alert.setContentText("Failed to connect to WORTH server. Check your settings and try again (Maybe edit pom.xml?)");
+            alert.showAndWait();
+            System.exit(-1);
+            return;
+        }
 
-        ChatHelper chatHelper = new ChatHelper(CHAT_PORT, CHAT_SOCKET_ADDR);
-
-        //todo add command line options
-        Client worthClient = new Client(ADDRESS, TCP_PORT, RMI_PORT, REGISTRY_NAME, chatHelper);
         FXMLLoader loader = new FXMLLoader(getClass().getResource("login.fxml"));
         Parent root = loader.load();
 

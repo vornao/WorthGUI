@@ -8,6 +8,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
@@ -41,6 +42,11 @@ public class Controller {
         if(client.login(username.getText(), password.getText())){
             parentStage.close();
             startProjectPanel();
+        }else{
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Oops...");
+            alert.setContentText("Wrong Username or Password.");
+            alert.show();
         }
     }
 
@@ -49,6 +55,11 @@ public class Controller {
             client.login(username.getText(), password.getText());
             parentStage.close();
             startProjectPanel();
+        }else{
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Oops...");
+            alert.setContentText("Something went wrong while signing up.. change username and try again");
+            alert.show();
         }
     }
 

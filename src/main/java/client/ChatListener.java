@@ -2,6 +2,8 @@ package client;
 
 import utils.Printer;
 
+import java.io.IOException;
+
 public class ChatListener implements Runnable{
     private final ChatHelper chatHelper;
 
@@ -14,6 +16,11 @@ public class ChatListener implements Runnable{
         Printer.println("> DEBUG: Chat thread started...", "yellow");
         while(!Thread.interrupted()) {
             chatHelper.startChatListener();
+        }
+        try {
+            chatHelper.close();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 }
