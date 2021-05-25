@@ -154,7 +154,7 @@ public class Client {
 
             for (JsonElement j : userlist) {
                 JsonObject user = (JsonObject) j;
-                worthUsers.put(user.get("username").getAsString(), (user.get("status").getAsBoolean()));
+                worthUsers.putIfAbsent(user.get("username").getAsString(), (user.get("status").getAsBoolean()));
             }
 
             //join to project chats

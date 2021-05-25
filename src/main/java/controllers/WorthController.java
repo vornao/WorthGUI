@@ -5,17 +5,13 @@ import components.CardLite;
 import components.ProjectLite;
 import components.UserLite;
 import javafx.application.Platform;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
-import javafx.stage.WindowEvent;
 
 import java.io.IOException;
 import java.util.*;
@@ -45,18 +41,8 @@ public class WorthController {
 
     public void setClient(Client c){
         client = c;
-        chatArea.setOnKeyPressed(keyEvent -> {
-            if (keyEvent.getCode() == KeyCode.ENTER)  {
-                try {
-                    sendChat();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-        });
     }
 
-    //todo check for null values and change name
     public synchronized void updateView(){
         chatArea.clear();
         addMemberButton.setDisable(false);
@@ -257,10 +243,11 @@ public class WorthController {
         stage.show();
     }
 
-    public synchronized void notifyMessage(String projectname, String message){
-        if(!messages.containsKey(projectname)) messages.put(projectname, new ArrayList<>());
-        ArrayList<String> localMsg = messages.get(projectname);
-        localMsg.add(message);
+    public void notifyMessage(String projectname, String message){
+
+        if(!messages.containsKey(projectname)) messages.putIfAbsent(projectname, new ArrayList<>());
+        messages.get(projectname).add(message);
+
         if (projectsTable.getSelectionModel().getSelectedItem().getName().equals(projectname)){
             chatArea.appendText(message + "\n");
         }
@@ -271,7 +258,7 @@ public class WorthController {
         String projectname = projectsTable.getSelectionModel().getSelectedItem().getName();
         chatTextBox.clear();
         client.sendChat(projectname, msg);
-        if(!messages.containsKey(projectname)) messages.put(projectname, new ArrayList<>());
+        if(!messages.containsKey(projectname)) messages.putIfAbsent(projectname, new ArrayList<>());
     }
 
     public void close() throws IOException {
